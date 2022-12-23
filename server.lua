@@ -1,5 +1,3 @@
-webhookurl = 'https://discord.com/api/webhooks/993148459869806592/Dznrd2lhqmGl49yaaS1CHCRD4KtRsSyPmDO-KF9_DTvAK2Qmy0VVkXmsSg8DM0h7Qewe' -- Add your discord webhook url here, if you do not want this leave it blank (More info on FiveM post) --
-
 AddEventHandler('playerConnecting', function(name, setKickReason, deferrals)
     local player = source
     deferrals.defer()
