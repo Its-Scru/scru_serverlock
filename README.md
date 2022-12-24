@@ -1,3 +1,8 @@
+Forked Version INCLUDES
+- Option to enable discord webhook & random password generator 
+![image](https://i.imgur.com/tdcdPTT.png)
+
+
 # Server Locked with Password
 ![image](https://user-images.githubusercontent.com/71755882/209230620-285de4fd-9175-465f-91c5-87d76557feff.png)
 
