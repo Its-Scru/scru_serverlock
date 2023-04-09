@@ -1,5 +1,17 @@
+function GetPlayerIdentifierFromType(type, player)
+    local identifierCount = GetNumPlayerIdentifiers(player)
+    for count = 0, identifierCount do
+        local identifier = GetPlayerIdentifier(player, count)
+        if identifier and string.find(identifier, type) then
+            return identifier
+        end
+    end
+    return nil
+end
+
 AddEventHandler('playerConnecting', function(name, setKickReason, deferrals)
     local player = source
+    local identifier = GetPlayerIdentifierFromType("license", player)
     deferrals.defer()
     Wait(0) 
 
@@ -10,7 +22,7 @@ AddEventHandler('playerConnecting', function(name, setKickReason, deferrals)
         ["body"] = {
             {
                 ["type"] = "TextBlock",
-                ["text"] = config.message,
+                ["text"] = config.passwordMessage,
                 ["wrap"] = true,
                 ["style"] = "heading"
             },
@@ -38,6 +50,13 @@ AddEventHandler('playerConnecting', function(name, setKickReason, deferrals)
     }
 
     local show = true
+    for _, whitelistLicense in pairs(config.whitelistedUsers) do
+        if identifier == whitelistLicense then
+            deferrals.done()
+            print(("%s is whitelisted and entering the server."):format(name))
+            return
+        end
+    end
     while show do
         Wait(0)
         deferrals.presentCard(passcodeCard, function (data, rawdata)
@@ -46,7 +65,7 @@ AddEventHandler('playerConnecting', function(name, setKickReason, deferrals)
                 deferrals.done()
                 print(("%s entered the correct password!"):format(name))
             else
-                deferrals.done(config.failMessage)
+                deferrals.done(config.passwordFailMessage)
                 print(("%s tried to connect to the server with the wrong password!"):format(name))
             end
         end)

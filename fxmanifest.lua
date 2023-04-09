@@ -2,7 +2,7 @@
 
 author "scru#0687"
 description "Server Password Lock"
-version "1.0"
+version "1.1"
 
 fx_version "cerulean"
 game "gta5"
